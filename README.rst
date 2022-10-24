@@ -7,7 +7,7 @@ Random Hebrew name generator
 Installation
 ------------
 
-The script is [`available on PyPI`](TODO).  To install with pip::
+The script is `available on PyPI`_.  To install with pip::
 
     pip install hebrew-names
 
@@ -56,7 +56,7 @@ Here are examples of all current features:
 License
 -------
 
-This project is released under an [`MIT License`](http://th.mit-license.org/2013).
+This project is released under an `MIT License`_.
 
 Data in the following files are public domain (derived from Israel's Central Bureau of Statistics 1948-2021 data):
 
@@ -75,3 +75,6 @@ Data in the following files are public domain (derived from Israel's Central Bur
 - dist.other.male.first
 - dist.other.female.first
 - dist.other.last
+
+.. _mit license: http://th.mit-license.org/2013
+.. _available on PyPI: http://pypi.python.org/pypi/hebrew-names/

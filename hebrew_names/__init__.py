@@ -32,11 +32,11 @@ FILES = {
 
 
 def get_name(filename):
-    selected = random.random() * 90
+    selected = random.random() * 100
     with codecs.open(filename, 'r', 'utf-16') as name_file:
         for line in name_file:
             name, _, _, cumulative, _ = line.split('\t')
-            if float(cumulative) > selected:
+            if float(cumulative) >= selected:
                 return name
     return ""  # Return empty string if file is empty
 
