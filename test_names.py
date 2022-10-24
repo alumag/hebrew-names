@@ -7,8 +7,8 @@ try:
 except:
     from io import StringIO
 from collections import defaultdict
-import names
-from names.main import main
+import hebrew_names
+from hebrew_names.main import main
 
 
 full_path = lambda filename: abspath(join(dirname(__file__), filename))
@@ -34,11 +34,11 @@ class patch_file:
         self.files = file_dict
 
     def __enter__(self):
-        self.old_files = names.FILES
-        names.FILES = self.files
+        self.old_files = hebrew_names.FILES
+        hebrew_names.FILES = self.files
 
     def __exit__(self, type, value, traceback):
-        names.FILES = self.old_files
+        hebrew_names.FILES = self.old_files
 
 test_files = {
     'first:male': full_path('test/male.txt'),
@@ -54,7 +54,7 @@ class NamesTest(unittest.TestCase):
         rounds = 5000.0
         test_file = full_path('test/file1.txt')
         for i in range(1, int(rounds)):
-            counts[names.get_name(test_file)] += 1
+            counts[hebrew_names.get_name(test_file)] += 1
         self.assertAlmostEqual(counts['Test1'] / rounds, 0.333, delta=0.05)
         self.assertAlmostEqual(counts['Test2'] / rounds, 0.277, delta=0.05)
         self.assertAlmostEqual(counts['Test3'] / rounds, 0.222, delta=0.05)
@@ -66,16 +66,16 @@ class NamesTest(unittest.TestCase):
         rounds = 5000.0
         with patch_file(test_files):
             for i in range(int(rounds)):
-                names.get_first_name()
-                counts[names.get_first_name()] += 1
+                hebrew_names.get_first_name()
+                counts[hebrew_names.get_first_name()] += 1
         self.assertAlmostEqual(counts['Male'] / rounds, 0.500, delta=0.05)
         self.assertAlmostEqual(counts['Female'] / rounds, 0.500, delta=0.05)
 
     def test_correct_files(self):
         with patch_file(test_files):
-            self.assertEqual(names.get_first_name(gender='male'), "Male")
-            self.assertEqual(names.get_first_name(gender='female'), "Female")
-            self.assertEqual(names.get_last_name(), "Last")
+            self.assertEqual(hebrew_names.get_first_name(gender='male'), "Male")
+            self.assertEqual(hebrew_names.get_first_name(gender='female'), "Female")
+            self.assertEqual(hebrew_names.get_last_name(), "Last")
 
     def test_empty_file(self):
         empty_files = {
@@ -84,13 +84,13 @@ class NamesTest(unittest.TestCase):
             'last': full_path('test/empty.txt'),
         }
         with patch_file(empty_files):
-            self.assertEqual(names.get_first_name(gender='male'), "")
-            self.assertEqual(names.get_first_name(gender='female'), "")
-            self.assertEqual(names.get_last_name(), "")
+            self.assertEqual(hebrew_names.get_first_name(gender='male'), "")
+            self.assertEqual(hebrew_names.get_first_name(gender='female'), "")
+            self.assertEqual(hebrew_names.get_last_name(), "")
     
     def test_only_male_and_female_gender_are_supported(self):
         with self.assertRaises(ValueError):
-            names.get_first_name(gender='other')
+            hebrew_names.get_first_name(gender='other')
 
 
 class CommandLineTest(unittest.TestCase):

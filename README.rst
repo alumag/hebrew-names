@@ -1,30 +1,21 @@
-names
-=====
+hebrew_names
+===============
 
-.. image:: https://secure.travis-ci.org/treyhunner/names.png?branch=master
-   :target: http://travis-ci.org/treyhunner/names
-.. image:: https://coveralls.io/repos/treyhunner/names/badge.png?branch=master
-   :target: https://coveralls.io/r/treyhunner/names
-.. image:: https://pypip.in/v/names/badge.png
-   :target: https://crate.io/packages/names
-.. image:: https://pypip.in/d/names/badge.png
-   :target: https://crate.io/packages/names
-
-Random name generator
+Random Hebrew name generator
 
 
 Installation
 ------------
 
-The script is `available on PyPI`_.  To install with pip::
+The script is [`available on PyPI`](TODO).  To install with pip::
 
-    pip install names
+    pip install hebrew-names
 
 
 Usage
 -----
 
-Names can be used as a command line utility or imported as a Python package.
+Hebrew Names can be used as a command line utility or imported as a Python package.
 
 Command Line Usage
 ~~~~~~~~~~~~~~~~~~
@@ -32,8 +23,8 @@ To use the script from the command line:
 
 .. code-block:: bash
 
-    $ names
-    John Powell
+    $ hebrew-names
+    צבי כהן
 
 Python Package Usage
 ~~~~~~~~~~~~~~~~~~~~
@@ -41,29 +32,46 @@ Here are examples of all current features:
 
 .. code-block:: pycon
 
-    >>> import names
-    >>> names.get_full_name()
-    u'Patricia Halford'
-    >>> names.get_full_name(gender='male')
-    u'Patrick Keating'
-    >>> names.get_first_name()
-    'Bernard'
-    >>> names.get_first_name(gender='female')
-    'Christina'
-    >>> names.get_last_name()
-    'Szczepanek'
+    >>> import hebrew_names
+    >>> hebrew_names.get_first_name('jew', 'female')
+    'יעל'
+    >>> hebrew_names.get_first_name('jew', 'female')
+    'תמר'
+    >>> hebrew_names.get_first_name('jew', 'male')
+    'אהרון'
+    >>> hebrew_names.get_first_name()
+    'מקסים'
+    >>> hebrew_names.get_first_name()
+    'נור'
+    >>> hebrew_names.get_first_name('muslim', 'male')
+    "מג'די"
+    >>> hebrew_names.get_first_name('muslim', 'male')
+    'מוחמד'
+    >>> hebrew_names.get_first_name('druze', 'male')
+    'ריאן'
+    >>> hebrew_names.get_first_name('other', 'male')
+    'אנטוני'
 
 
 License
 -------
 
-This project is released under an `MIT License`_.
+This project is released under an [`MIT License`](http://th.mit-license.org/2013).
 
-Data in the following files are public domain (derived from 1990 Census data):
+Data in the following files are public domain (derived from Israel's Central Bureau of Statistics 1948-2021 data):
 
-- dist.all.last
-- dist.female.first
-- dist.male.first
-
-.. _mit license: http://th.mit-license.org/2013
-.. _available on PyPI: http://pypi.python.org/pypi/names/
+- dist.jew.male.first
+- dist.jew.female.first
+- dist.jew.last
+- dist.muslim.male.first
+- dist.muslim.female.first
+- dist.muslim.last
+- dist.christian.male.first
+- dist.christian.female.first
+- dist.christian.last
+- dist.druze.male.first
+- dist.druze.female.first
+- dist.druze.last
+- dist.other.male.first
+- dist.other.female.first
+- dist.other.last
