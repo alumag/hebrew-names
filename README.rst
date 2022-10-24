@@ -47,6 +47,8 @@ Here are examples of all current features:
     "מג'די"
     >>> hebrew_names.get_first_name('muslim', 'male')
     'מוחמד'
+    >>> hebrew_names.get_first_name('christian', 'male')
+    "'ג'ורג'"
     >>> hebrew_names.get_first_name('druze', 'male')
     'ריאן'
     >>> hebrew_names.get_first_name('other', 'male')
