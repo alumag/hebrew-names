@@ -1,4 +1,5 @@
 from os.path import abspath, join, dirname
+import itertools
 import codecs
 import random
 
@@ -10,25 +11,18 @@ __license__ = 'MIT'
 
 
 full_path = lambda filename: abspath(join(dirname(__file__), filename))
-
+ETHNICITIES = ['jew', 'muslim', 'christian', 'druze', 'other']
+GENDERS = ['male', 'female']
 
 FILES = {
-    'first:jew:male': full_path('dist.jew.male.first'),
-    'first:jew:female': full_path('dist.jew.female.first'),
-    'last:jew': full_path('dist.jew.last'),
-    'first:muslim:male': full_path('dist.muslim.male.first'),
-    'first:muslim:female': full_path('dist.muslim.female.first'),
-    'last.muslim': full_path('dist.muslim.last'),
-    'first:christian:male': full_path('dist.christian.male.first'),
-    'first:christian:female': full_path('dist.christian.female.first'),
-    'last:christian': full_path('dist.christian.last'),
-    'first:druze:male': full_path('dist.druze.male.first'),
-    'first:druze:female': full_path('dist.druze.female.first'),
-    'last:druze': full_path('dist.druze.last'),
-    'first:other:male': full_path('dist.other.male.first'),
-    'first:other:female': full_path('dist.other.female.first'),
-    'last:other': full_path('dist.other.last'),
+    f'first:{ethnicity}:{gender}': full_path(f'dist.{ethnicity}.{gender}.first')
+    for (ethnicity, gender) in itertools.product(ETHNICITIES, GENDERS)
 }
+
+FILES.update({
+    f'last:{ethnicity}': full_path(f'dist.{ethnicity}.last')
+    for ethnicity in ETHNICITIES
+})
 
 
 def get_name(filename):
@@ -41,29 +35,34 @@ def get_name(filename):
     return ""  # Return empty string if file is empty
 
 
-def get_first_name(ethnicity=None, gender=None):
-    if ethnicity is None:
-        ethnicity = random.choice(('jew', 'muslim', 'christian', 'druze', 'other'))
-    if ethnicity not in ('jew', 'muslim', 'christian', 'druze', 'other'):
+def select_gender(gender=None):
+    gender = gender or random.choice(GENDERS)
+    if gender not in GENDERS:
+        raise ValueError(f"Only 'male' and 'female' are supported as gender")
+    return gender
+
+
+def select_ethnicity(ethnicity=None):
+    ethnicity = ethnicity or random.choice(ETHNICITIES)
+    if ethnicity not in ETHNICITIES:
         raise ValueError("Only 'jew', 'muslim', 'christian', 'druze' and 'other' are supported as ethnicity")
-    if gender is None:
-        gender = random.choice(('male', 'female'))
-    if gender not in ('male', 'female'):
-        raise ValueError("Only 'male' and 'female' are supported as gender")
+    return ethnicity
+
+
+def get_first_name(ethnicity=None, gender=None):
+    ethnicity = select_ethnicity(ethnicity)
+    gender = select_gender(gender)
     return get_name(FILES[f'first:{ethnicity}:{gender}'])
 
 
 def get_last_name(ethnicity=None):
     raise NotImplementedError('get_last_name is not implemented')
 
-    if ethnicity is None:
-        ethnicity = random.choice(('jew', 'muslim', 'christian', 'druze', 'other'))
-    if ethnicity not in ('jew', 'muslim', 'christian', 'druze', 'other'):
-        raise ValueError("Only 'jew', 'muslim', 'christian', 'druze' and 'other' are supported as ethnicity")
+    ethnicity = select_ethnicity(ethnicity)
     return get_name(FILES[f'last:${ethnicity}'])
 
 
 def get_full_name(ethnicity=None, gender=None):
     raise NotImplementedError('get_full_name is not implemented')
 
-    return "{0} {1}".format(get_first_name(ethnicity, gender), get_last_name(ethnicity))
+    return f'{get_first_name(ethnicity, gender)} {get_last_name(ethnicity)}'
