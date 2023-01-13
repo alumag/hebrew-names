@@ -10,7 +10,10 @@ __author__ = 'Aluma Gelbard'
 __license__ = 'MIT'
 
 
-full_path = lambda filename: abspath(join(dirname(__file__), filename))
+def full_path(filename):
+    return abspath(join(dirname(__file__), filename))
+
+
 ETHNICITIES = ('jew', 'muslim', 'christian', 'druze', 'other')
 GENDERS = ('male', 'female')
 
@@ -24,7 +27,7 @@ FILES.update({
     for ethnicity in ETHNICITIES
 })
 
-FILES['cumulatives.all'] = full_path(f'dist.cumulatives.all')
+FILES['cumulatives.all'] = full_path('dist.cumulatives.all')
 
 CUMULATIVES = None
 
