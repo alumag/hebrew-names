@@ -31,7 +31,7 @@ def get_last_cumulative(filename):
         try:
             _, _, _, cumulative, _ = lines[-1].split('\t')
             return float(cumulative)
-        except:
+        except ValueError:
             return -1
 
 
@@ -54,7 +54,7 @@ def get_name(file):
 def select_gender(gender=None):
     gender = gender or random.choice(GENDERS)
     if gender not in GENDERS:
-        raise ValueError(f"Only 'male' and 'female' are supported as gender")
+        raise ValueError("Only 'male' and 'female' are supported as gender")
     return gender
 
 
