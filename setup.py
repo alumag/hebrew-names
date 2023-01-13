@@ -1,8 +1,9 @@
 import hebrew_names
+import codecs
 from setuptools import setup, find_packages
 
 
-with open('README.rst') as readme_file:
+with codecs.open('README.rst', 'r', 'utf-16') as readme_file:
     readme = readme_file.read()
 
 with open('CHANGES.rst') as changes_file:
@@ -46,6 +47,5 @@ setup(
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: Implementation :: PyPy',
-    ],
-    test_suite='test_names',
+    ]
 )

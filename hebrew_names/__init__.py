@@ -24,24 +24,23 @@ FILES.update({
     for ethnicity in ETHNICITIES
 })
 
+FILES['cumulatives.all'] = full_path(f'dist.cumulatives.all')
 
-def get_last_cumulative(filename):
-    with codecs.open(filename, 'r', 'utf-16') as name_file:
-        lines = name_file.readlines()
-        try:
-            _, _, _, cumulative, _ = lines[-1].split('\t')
-            return float(cumulative)
-        except ValueError:
-            return -1
+CUMULATIVES = None
 
 
-CUMULATIVES = {
-    file: get_last_cumulative(filepath)
-    for file, filepath in FILES.items()
-}
+def load_cumulatives():
+    with codecs.open(FILES['cumulatives.all'], 'r', 'utf-16') as cumulatives_file:
+        global CUMULATIVES
+        CUMULATIVES = {
+            file: float(last_cumulative) for (file, last_cumulative) in (line.split('\t') for line in cumulatives_file)
+        }
 
 
 def get_name(file):
+    if (not CUMULATIVES):
+        load_cumulatives()
+
     selected = random.random() * CUMULATIVES[file]
     with codecs.open(FILES[file], 'r', 'utf-16') as name_file:
         for line in name_file:
