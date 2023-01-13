@@ -53,7 +53,10 @@ Here are examples of all current features:
     'ריאן'
     >>> hebrew_names.get_first_name('other', 'male')
     'אנטוני'
-
+    >>> hebrew_names.get_last_name('jew')
+    'גלברד'
+    >>> hebrew_names.get_full_name('muslim', 'female')
+    'אמירה איוב'
 
 License
 -------
