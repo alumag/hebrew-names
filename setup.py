@@ -1,6 +1,6 @@
-import hebrew_names
 import codecs
 from setuptools import setup, find_packages
+import hebrew_names
 
 
 with codecs.open('README.rst', 'r', 'utf-16') as readme_file:
