@@ -17,8 +17,8 @@ setup(
     name=hebrew_names.__title__,
     version=hebrew_names.__version__,
     author=hebrew_names.__author__,
-    url="https://github.com/alumag/hebrew-hebrew_names",
-    description="Generate random Hebrew hebrew_names",
+    url="https://github.com/alumag/hebrew-names",
+    description="Generate random first and last names in Hebrew",
     long_description='\n\n'.join((
         readme,
         changes,

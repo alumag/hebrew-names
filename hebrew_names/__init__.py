@@ -4,7 +4,7 @@ import codecs
 import random
 
 
-__title__ = 'hebrew_names'
+__title__ = 'hebrew-names'
 __version__ = '0.0.1'
 __author__ = 'Aluma Gelbard'
 __license__ = 'MIT'
